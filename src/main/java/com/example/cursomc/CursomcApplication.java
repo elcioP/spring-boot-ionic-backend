@@ -27,10 +27,13 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//criando objeto categoria
 		Categoria cat1 = new Categoria(null, "informática");
 		Categoria cat2 = new Categoria(null, "escritorio");
-		
+		//salvando categoria no banco
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		
+		//criando objeto produto
 		Produto produto1 = new Produto(null, "computador", 2000.00);
 		Produto produto2 = new Produto(null, "impressora", 800.00);
 		Produto produto3 = new Produto(null, "mouse", 80.00);
@@ -40,10 +43,12 @@ public class CursomcApplication implements CommandLineRunner {
 		cat1.getProdutos().addAll(Arrays.asList(produto1,produto2,produto3));
 		cat2.getProdutos().addAll(Arrays.asList(produto2));
 		
+		//adicionando as categorias nos produtos
 		produto1.getCategorias().add(cat1);
 		produto2.getCategorias().addAll(Arrays.asList(cat1,cat2));
 		produto3.getCategorias().add(cat1); 
 		
+		//salvando os produtos no banco, ja com as categorias
 		produtoRepository.saveAll(Arrays.asList(produto1,produto2,produto3));
 		
 	}
