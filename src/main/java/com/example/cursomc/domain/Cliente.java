@@ -1,6 +1,9 @@
 package com.example.cursomc.domain;
 
+
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +21,6 @@ import com.example.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Cliente implements Serializable{
-	
-	
 	/**
 	 * 
 	 */
@@ -32,6 +33,9 @@ public class Cliente implements Serializable{
 	private String email;
 	private String cnpj;
 	private Integer tipo;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
@@ -118,6 +122,12 @@ public class Cliente implements Serializable{
 	}
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 }
